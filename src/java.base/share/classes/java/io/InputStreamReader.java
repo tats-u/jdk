@@ -72,7 +72,10 @@ public class InputStreamReader extends Reader {
     @SuppressWarnings("this-escape")
     public InputStreamReader(InputStream in) {
         super(in);
-        Charset cs = Charset.defaultCharset();
+        Charset cs =
+            in == System.in
+          ? Charset.forName(System.getProperty("stdin.encoding", ""), Charset.defaultCharset())
+          : Charset.defaultCharset();
         sd = StreamDecoder.forInputStreamReader(in, this, cs);
     }
 
