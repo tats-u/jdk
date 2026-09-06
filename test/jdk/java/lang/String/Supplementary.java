@@ -394,15 +394,14 @@ public class Supplementary {
      * correctly.
      */
     static void test8() {
-        {
-            int result = str.codePointCount();
-            int expected = Character.codePointCount(str, 0, str.length());
-            check(result != expected, "String::codePointCount()", result, expected);
-        }
-
         for (int i = 0; i < input.length; i++) {
             String str = input[i];
             int length = str.length();
+            {
+                int result = str.codePointCount();
+                int expected = Character.codePointCount(str, 0, str.length());
+                check(result != expected, "String::codePointCount()", result, expected);
+            }
             for (int j = 0; j <= length; j++) {
                 int result = str.codePointCount(j, length);
                 int expected = Character.codePointCount(str, j, length);
