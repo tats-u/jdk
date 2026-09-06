@@ -406,7 +406,7 @@ public class Supplementary {
                 // underlying char[] of the String str.
                 String substr = str.substring(j, length);
                 result = substr.codePointCount(0, substr.length());
-                check(result != expected, "substring:codePointCount(input["+i+"], "+j+", "+length+")",
+                check(result != expected, "String::codePointCount(input["+i+"], "+j+", "+length+")",
                       result, expected);
             }
             for (int j = length; j >= 0; j--) {
@@ -416,13 +416,13 @@ public class Supplementary {
                       result, expected);
                 String substr = str.substring(0, j);
                 result = substr.codePointCount(0, substr.length());
-                check(result != expected, "substring:codePointCount(input["+i+"], 0, "+j+")",
+                check(result != expected, "String::codePointCount(input["+i+"], 0, "+j+")",
                       result, expected);
             }
 
             int result = str.codePointCount();
             int expected = Character.codePointCount(str, 0, str.length());
-            check(result != expected, "substring:codePointCount()", result, expected);
+            check(result != expected, "String::codePointCount()", result, expected);
 
             // test exceptions
             testCodePointCount(null, 0, 0, NullPointerException.class);
