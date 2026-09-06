@@ -394,6 +394,12 @@ public class Supplementary {
      * correctly.
      */
     static void test8() {
+        {
+            int result = str.codePointCount();
+            int expected = Character.codePointCount(str, 0, str.length());
+            check(result != expected, "String::codePointCount()", result, expected);
+        }
+
         for (int i = 0; i < input.length; i++) {
             String str = input[i];
             int length = str.length();
@@ -402,11 +408,12 @@ public class Supplementary {
                 int expected = Character.codePointCount(str, j, length);
                 check(result != expected, "codePointCount(input["+i+"], "+j+", "+length+")",
                       result, expected);
-                // Create a substring of the text range. It shares the
-                // underlying char[] of the String str.
                 String substr = str.substring(j, length);
                 result = substr.codePointCount(0, substr.length());
                 check(result != expected, "String::codePointCount(input["+i+"], "+j+", "+length+")",
+                      result, expected);
+                result = substr.codePointCount();
+                check(result != expected, "String::codePointCount()",
                       result, expected);
             }
             for (int j = length; j >= 0; j--) {
@@ -418,11 +425,10 @@ public class Supplementary {
                 result = substr.codePointCount(0, substr.length());
                 check(result != expected, "String::codePointCount(input["+i+"], 0, "+j+")",
                       result, expected);
+                result = substr.codePointCount();
+                check(result != expected, "String::codePointCount()",
+                      result, expected);
             }
-
-            int result = str.codePointCount();
-            int expected = Character.codePointCount(str, 0, str.length());
-            check(result != expected, "String::codePointCount()", result, expected);
 
             // test exceptions
             testCodePointCount(null, 0, 0, NullPointerException.class);
